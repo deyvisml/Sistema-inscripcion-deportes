@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Tipo::class);
     }
+
+    public function roles()
+    {
+        return $this->tipo->roles();
+    }
 }

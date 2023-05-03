@@ -31,10 +31,6 @@
     </script>
 
 
-
-
-
-
     @stack('css-scripts')
 
     @vite('resources/css/app.css')

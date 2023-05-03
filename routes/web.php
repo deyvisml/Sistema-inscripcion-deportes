@@ -32,6 +32,9 @@ Route::get("/logout", [AuthController::class, "logout"])->name("login.logout");
 
 Route::get("/inicio", [UserController::class, "index"])->name("user.index");
 
-Route::get("/inscribir", [UserController::class, "inscribir"])->name("user.inscribir");
+// manejador urls
+Route::get("/{rol:url}", [UserController::class, "handler"])->name("user.handler");
 
-Route::get("/reporte_jugadores", [UserController::class, "reporte_jugadores"])->name("user.reporte_jugadores");
+//Route::get("/inscribir", [UserController::class, "inscribir"])->name("inscribir");
+
+Route::get("/reporte_jugadores", [UserController::class, "reporte_jugadores"])->name("reporte_jugadores");
