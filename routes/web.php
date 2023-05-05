@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ParticipanteController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
@@ -36,6 +37,8 @@ Route::get("/home", [UserController::class, "index"])->name("user.index");
 
 
 Route::get("/reportes/{deporte}", [ReporteController::class, "index"])->name("reporte.index");
+
+Route::get("/reportes/{deporte}/pdf", [PDFController::class, "generatePDF"])->name("reporte.pdf");
 
 // manejador urls
 Route::get("/{rol:url}", [UserController::class, "handler"])->name("user.handler");

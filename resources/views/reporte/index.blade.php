@@ -10,23 +10,17 @@
             <h2 class="text-2xl font-semibold w-full border-b-2 pb-1 mb-4 border-neutral-200">{{ $deporte['name'] }}</h2>
 
             <div class="sm:w-3/4 w-full bg-white">
-                <a data-te-ripple-init data-te-ripple-color="light"
-                    class="mb-4 ml-auto inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 "
-                    href="{{ route('participante.formulario', ['rol' => $current_rol, 'deporte' => $deporte]) }}">
-                    Generar PDF
-                </a>
+                @if ($inscritos->count() > 0)
+                    <a data-te-ripple-init data-te-ripple-color="light"
+                        class="mb-4 ml-auto inline-block rounded bg-danger hover:bg-danger-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 "
+                        href="{{ route('reporte.pdf', ['deporte' => $deporte]) }}">
+                        Generar PDF
+                    </a>
+                @endif
 
-                @if (session('inscripcion_success'))
+                @if (session('success'))
                     <p class="bg-green-500 text-white text-sm p-1 text-center my-1">
-                        {{ session('inscripcion_success') }}
-                    </p>
-                @elseif (session('update_success'))
-                    <p class="bg-green-500 text-white text-sm p-1 text-center my-1">
-                        {{ session('update_success') }}
-                    </p>
-                @elseif (session('delete_success'))
-                    <p class="bg-green-500 text-white text-sm p-1 text-center my-1">
-                        {{ session('delete_success') }}
+                        {{ session('success') }}
                     </p>
                 @endif
 
@@ -56,7 +50,7 @@
                                         {{ $inscrito['codigo'] }}
                                     </td>
                                     <td class="border-2 p-1 py-2 border-neutral-300 uppercase">
-                                        {{ $inscrito['created_at'] }}
+                                        {{ \Carbon\Carbon::parse($inscrito['created_at'])->format('d/m/Y') }}
                                     </td>
                                 </tr>
                                 @php

@@ -11,7 +11,15 @@
 </head>
 
 <body>
-    <div class=" bg-[#2d2e48] w-full min-h-screen flex justify-center items-center">
+    <div class=" bg-[#2d2e48] w-full min-h-screen flex flex-col justify-center items-center p-2">
+        <div class="w-full max-w-[400px] h-auto p-2 mx-2 text-white flex flex-col justify-center items-center">
+            <a href="/" class="w-auto mb-4">
+                <img src="{{ asset('https://aulavirtual2.unap.edu.pe/images/logos/unap/logo.png') }}" alt="imagen logo"
+                    class="object-contain max-h-[70px] py-2">
+            </a>
+            <h2 class="text-2xl">Deportes - UNA Puno</h2>
+        </div>
+
         <div class="bg-white shadow-lg rounded w-full max-w-[400px] h-auto p-2 my-4 mx-2">
             <h3 class="text-center font-semibold text-2xl">Login</h3>
             <form action="{{ route('login.store') }}" method="post" class="p-4">
@@ -19,17 +27,13 @@
                     <p class="bg-red-500 text-white text-sm p-1 text-center my-1">
                         {{ session('message') }}
                     </p>
-                @elseif (session('register_success'))
-                    <p class="bg-green-500 text-white text-sm p-1 text-center my-1">
-                        {{ session('register_success') }}
-                    </p>
                 @endif
 
                 @csrf
 
                 <div class="mb-2">
                     <label for="user">Usuario</label> <br>
-                    <input value="{{ old('user') }}" type="text" name="user" id="user"
+                    <input autofocus value="{{ old('user') }}" type="text" name="user" id="user"
                         class="rounded w-full border border-gray-500 p-2 outline-none my-1 @error('user') border-red-700 @enderror">
                     @error('user')
                         <div class="text-red-700">{{ $message }}</div>
@@ -65,7 +69,7 @@
 
                 <div class="">
                     <input type="submit" value="Iniciar sesión"
-                        class="rounded w-full border bg-blue-700 font-semibold text-white p-2 outline-none my-1 cursor-pointer">
+                        class="rounded w-full border bg-primary hover:bg-primary-600 font-semibold text-white p-2 outline-none my-1 cursor-pointer">
                 </div>
             </form>
         </div>

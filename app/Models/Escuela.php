@@ -13,4 +13,9 @@ class Escuela extends Model
         "name",
         "facultad_id"
     ];
+
+    public function facultad()
+    {
+        return $this->belongsTo(Facultad::class);
+    }
 }
