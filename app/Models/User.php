@@ -46,6 +46,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function escuela()
+    {
+        return $this->belongsTo(Escuela::class);
+    }
+
     public function tipo()
     {
         return $this->belongsTo(Tipo::class);

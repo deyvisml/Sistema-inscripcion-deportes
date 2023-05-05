@@ -17,6 +17,7 @@ class Inscrito extends Model
         "user_id",
         "escuela_id",
         "deporte_id",
+        "estado_id",
         "deleted_at",
         "created_at",
         "updated_at",

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('deportes', function (Blueprint $table) {
             $table->id();
             $table->string("name")->nullable(false);
+            $table->string("image")->nullable(false);
             $table->string("num_max_players")->nullable(false);
             $table->date("fecha_limite")->nullable(false);
             $table->timestamps();

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,11 +32,24 @@ Route::get("/logout", [AuthController::class, "logout"])->name("login.logout");
 
 
 
-Route::get("/inicio", [UserController::class, "index"])->name("user.index");
+Route::get("/home", [UserController::class, "index"])->name("user.index");
+
+
+Route::get("/reportes/{deporte}", [ReporteController::class, "index"])->name("reporte.index");
 
 // manejador urls
 Route::get("/{rol:url}", [UserController::class, "handler"])->name("user.handler");
 
-//Route::get("/inscribir", [UserController::class, "inscribir"])->name("inscribir");
+Route::get("/{rol:url}/{deporte}", [ParticipanteController::class, "index"])->name("participante.index");
+
+Route::get("/{rol:url}/{deporte}/formulario", [ParticipanteController::class, "formulario"])->name("participante.formulario");
+
+Route::post("/{rol:url}/{deporte}/formulario", [ParticipanteController::class, "store"])->name("participante.store");
+
+Route::get("/{rol:url}/{deporte}/editar/{inscrito}", [ParticipanteController::class, "editar"])->name("participante.editar");
+
+Route::post("/{rol:url}/{deporte}/editar/{inscrito}", [ParticipanteController::class, "update"])->name("participante.editar");
+
+Route::get("/{rol:url}/{deporte}/delete/{inscrito}", [ParticipanteController::class, "delete"])->name("participante.borrar");
 
 Route::get("/reporte_jugadores", [UserController::class, "reporte_jugadores"])->name("reporte_jugadores");

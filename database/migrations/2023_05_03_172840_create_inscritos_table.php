@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained()->onDelete("cascade");
             $table->foreignId("escuela_id")->constrained()->onDelete("cascade");
             $table->foreignId("deporte_id")->constrained()->onDelete("cascade");
+            $table->foreignId("estado_id")->constrained()->onDelete("cascade");
             $table->timestamp("deleted_at");
             $table->timestamps();
         });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Rol;
 use App\Models\Acceso;
+use App\Models\Deporte;
+use App\Models\Inscrito;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -66,11 +68,37 @@ class UserController extends Controller
         }
     }
 
+    public function get_inscritos_deporte(Deporte $deporte)
+    {
+        $user_id = auth()->user()->id;
+        $inscrito = 1;
+
+        $inscritos = Inscrito::join("users", "inscritos.user_id", "=", "users.id")
+            ->join("deportes", "inscritos.deporte_id", "=", "deportes.id")
+            ->join("estados", "inscritos.estado_id", "=", "estados.id")
+            ->where("deportes.id", "=", $deporte->id)
+            ->where("users.id", "=", $user_id)
+            ->where("estados.id", "=", $inscrito)
+            ->get("inscritos.*");
+
+        return $inscritos;
+    }
+
     public function inscribir($roles, $rol)
     {
-        //dd("inscribir");
+        $deportes = Deporte::orderBy("name", "ASC")->get();
 
+        $group_deportes = array();
 
-        return view("user.inscribir", ["roles" => $roles, "current_rol" => $rol]);
+        for ($i = 0; $i < count($deportes); $i++) {
+            $deporte = $deportes[$i];
+            $group_deportes[$i] = array();
+
+            $group_deportes[$i]["deporte"] = $deporte;
+
+            $group_deportes[$i]["num_inscritos"] = $this->get_inscritos_deporte($deporte)->count();
+        }
+
+        return view("user.inscribir", ["roles" => $roles, "current_rol" => $rol, "group_deportes" => $group_deportes]);
     }
 }

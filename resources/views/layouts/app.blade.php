@@ -7,7 +7,7 @@
 
     <title>Deportes UNA - @yield('title')</title>
 
-    <link rel="icon" href="https://elt.oup.com/system/img/favicon-152.png">
+    <link href="https://aulavirtual2.unap.edu.pe/images/themes/unap/favicon.ico" rel="icon">
 
 
 
@@ -52,7 +52,7 @@
             @foreach ($roles as $rol)
                 <li class="">
                     <a href="{{ route('user.handler', ['rol' => $rol]) }}"
-                        class="block cursor-pointer text-sm border-neutral-200 hover:text-white @if ($rol['id'] == $current_rol['id']) border-b-2 text-white @endif">
+                        class="block cursor-pointer px-0.5 text-sm border-neutral-200 hover:text-white @if ($rol['id'] == $current_rol['id']) border-b-2 text-white @endif">
                         {{ $rol['name'] }}
                     </a>
                 </li>
