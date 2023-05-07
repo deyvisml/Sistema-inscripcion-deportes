@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrganizadorController;
 use App\Http\Controllers\ParticipanteController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\RegisterController;
@@ -33,8 +34,12 @@ Route::get("/logout", [AuthController::class, "logout"])->name("login.logout");
 
 
 
-Route::get("/home", [UserController::class, "index"])->name("user.index");
+Route::get("/organizador", [OrganizadorController::class, "index"])->name("organizador.index");
+Route::post("/organizador/{rol}", [OrganizadorController::class, "filtro"])->name("organizador.filter");
+Route::get("/organizador/{rol}/escuelas/{escuela}/deportes/{deporte}", [ReporteController::class, "inscritos_by_escuela_deporte"])->name("organizador.inscritos"); // todo: working in this
 
+
+Route::get("/home", [UserController::class, "index"])->name("user.index");
 
 Route::get("/reportes/{deporte}", [ReporteController::class, "index"])->name("reporte.index");
 
@@ -42,6 +47,7 @@ Route::get("/reportes/{deporte}/pdf", [PDFController::class, "generatePDF"])->na
 
 // manejador urls
 Route::get("/{rol:url}", [UserController::class, "handler"])->name("user.handler");
+
 
 Route::get("/{rol:url}/{deporte}", [ParticipanteController::class, "index"])->name("participante.index");
 

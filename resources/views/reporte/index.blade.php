@@ -30,7 +30,7 @@
                     <table class="w-full mb-10 md:text-sm text-xs">
                         <thead class="bg-neutral-300">
                             <tr>
-                                <th class="border-2 p-1 py-2 border-neutral-300">Nº</th>
+                                <th class="border-2 p-1 py-2 border-neutral-300">#</th>
                                 <th class="border-2 p-1 py-2  border-neutral-300">Apelidos y nombres</th>
                                 <th class="border-2 p-1 py-2  border-neutral-300">Código</th>
                                 <th class="border-2 p-1 py-2 border-neutral-300">Fecha de inscripción</th>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rol;
 use App\Models\Acceso;
 use App\Models\Deporte;
+use App\Models\Escuela;
 use App\Models\Inscrito;
 use Illuminate\Http\Request;
 
@@ -49,6 +50,7 @@ class UserController extends Controller
         // verificar si el usuario tiene acceso
         $res = $roles->toQuery()->where("id", "=", $rol["id"])->get();
 
+
         if ($res->isEmpty()) {
             // no tiene permiso
             return redirect()->route("user.index");
@@ -58,9 +60,9 @@ class UserController extends Controller
             case '1':
                 return $this->inscribir($roles, $rol);
                 break;
-            case '2':
-                dd("reporte judadores");
-                break;
+            case '3':
+                return redirect()->route("organizador.index");
+                //return $this->reporte_jugadores_carrera($roles, $rol);
 
             default:
                 // si el id rol es desconocido
@@ -68,24 +70,22 @@ class UserController extends Controller
         }
     }
 
-    public function get_inscritos_deporte(Deporte $deporte)
+    public function get_inscritos_escuela_deporte(Escuela $escuela, Deporte $deporte)
     {
-        $user_id = auth()->user()->id;
         $inscrito = 1;
 
-        $inscritos = Inscrito::join("users", "inscritos.user_id", "=", "users.id")
-            ->join("deportes", "inscritos.deporte_id", "=", "deportes.id")
-            ->join("estados", "inscritos.estado_id", "=", "estados.id")
-            ->where("deportes.id", "=", $deporte->id)
-            ->where("users.id", "=", $user_id)
-            ->where("estados.id", "=", $inscrito)
-            ->get("inscritos.*");
+        $inscritos = Inscrito::where("escuela_id", "=", $escuela->id)
+            ->where("deporte_id", "=", $deporte->id)
+            ->where("estado_id", "=", $inscrito)
+            ->get();
 
         return $inscritos;
     }
 
     public function inscribir($roles, $rol)
     {
+        $escuela = auth()->user()->escuela;
+
         $deportes = Deporte::orderBy("name", "ASC")->get();
 
         $group_deportes = array();
@@ -96,7 +96,7 @@ class UserController extends Controller
 
             $group_deportes[$i]["deporte"] = $deporte;
 
-            $group_deportes[$i]["num_inscritos"] = $this->get_inscritos_deporte($deporte)->count();
+            $group_deportes[$i]["num_inscritos"] = $this->get_inscritos_escuela_deporte($escuela, $deporte)->count();
         }
 
         return view("user.inscribir", ["roles" => $roles, "current_rol" => $rol, "group_deportes" => $group_deportes]);

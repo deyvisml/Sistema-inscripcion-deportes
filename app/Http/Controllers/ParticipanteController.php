@@ -7,6 +7,7 @@ use App\Models\Rol;
 use App\Models\User;
 use App\Models\Acceso;
 use App\Models\Deporte;
+use App\Models\Escuela;
 use App\Models\Inscrito;
 use Illuminate\Http\Request;
 
@@ -34,18 +35,14 @@ class ParticipanteController extends Controller
         return $roles;
     }
 
-    public function get_inscritos_deporte(Deporte $deporte)
+    public function get_inscritos_escuela_deporte(Escuela $escuela, Deporte $deporte)
     {
-        $user_id = auth()->user()->id;
         $inscrito = 1;
 
-        $inscritos = Inscrito::join("users", "inscritos.user_id", "=", "users.id")
-            ->join("deportes", "inscritos.deporte_id", "=", "deportes.id")
-            ->join("estados", "inscritos.estado_id", "=", "estados.id")
-            ->where("deportes.id", "=", $deporte->id)
-            ->where("users.id", "=", $user_id)
-            ->where("estados.id", "=", $inscrito)
-            ->get("inscritos.*");
+        $inscritos = Inscrito::where("escuela_id", "=", $escuela->id)
+            ->where("deporte_id", "=", $deporte->id)
+            ->where("estado_id", "=", $inscrito)
+            ->get();
 
         return $inscritos;
     }
@@ -61,7 +58,9 @@ class ParticipanteController extends Controller
 
         $roles = $this->get_active_roles();
 
-        $inscritos = $this->get_inscritos_deporte($deporte);
+        $escuela = auth()->user()->escuela;
+
+        $inscritos = $this->get_inscritos_escuela_deporte($escuela, $deporte);
 
         return view("user.participantes", ["roles" => $roles, "current_rol" => $rol, "deporte" => $deporte, "inscritos" => $inscritos]);
     }
@@ -156,7 +155,10 @@ class ParticipanteController extends Controller
     public function delete(Rol $rol, Deporte $deporte, Inscrito $inscrito)
     {
         $inscrito = Inscrito::findOrFail($inscrito->id);
-        if ($inscrito->user_id != auth()->user()->id) {
+
+        $escuela = auth()->user()->escuela;
+
+        if ($inscrito->escuela_id != $escuela->id) {
             return redirect()->route("login");
         }
 
