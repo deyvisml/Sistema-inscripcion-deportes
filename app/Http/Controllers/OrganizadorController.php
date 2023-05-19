@@ -16,7 +16,15 @@ class OrganizadorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+
+            if ($user && $user->tipo_id === 2) {
+                return $next($request);
+            }
+
+            return redirect()->route("handler.index");
+        });
     }
 
     public function index()
@@ -103,5 +111,12 @@ class OrganizadorController extends Controller
         }
 
         return view("organizador.filtro", ["roles" => $roles, "current_rol" => $rol, "facultades" => $facultades, "escuelas" => $escuelas, "facultad" => $facultad, "escuela" => $escuela,  "group_deportes" => $group_deportes]);
+    }
+
+    public function inscritos(Rol $rol, Escuela $escuela, Deporte $deporte)
+    {
+        $reporte_controller = new ReporteController;
+
+        return $reporte_controller->inscritos_by_escuela_deporte($rol, $escuela, $deporte);
     }
 }

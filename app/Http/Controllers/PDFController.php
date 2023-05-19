@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deporte;
+use App\Models\Escuela;
 use App\Models\Inscrito;
 use PDF;
 use Illuminate\Http\Request;
@@ -11,30 +12,33 @@ class PDFController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+
+            if ($user) {
+                return $next($request);
+            }
+
+            abort(403, 'No tienes permisos para acceder a esta página.');
+        });
     }
 
-    public function get_inscritos_deporte(Deporte $deporte)
+    public function get_inscritos_escuela_deporte(Escuela $escuela, Deporte $deporte)
     {
-        $user_id = auth()->user()->id;
         $inscrito = 1;
 
-        $inscritos = Inscrito::join("users", "inscritos.user_id", "=", "users.id")
-            ->join("deportes", "inscritos.deporte_id", "=", "deportes.id")
-            ->join("estados", "inscritos.estado_id", "=", "estados.id")
-            ->where("deportes.id", "=", $deporte->id)
-            ->where("users.id", "=", $user_id)
-            ->where("estados.id", "=", $inscrito)
-            ->get("inscritos.*");
+        $inscritos = Inscrito::where("escuela_id", "=", $escuela->id)
+            ->where("deporte_id", "=", $deporte->id)
+            ->where("estado_id", "=", $inscrito)
+            ->get();
 
         return $inscritos;
     }
 
-    public function generatePDF(Deporte $deporte)
+    public function generatePDF(Escuela $escuela, Deporte $deporte)
     {
-        $escuela = auth()->user()->escuela;
         $facultad = $escuela->facultad;
-        $inscritos = $this->get_inscritos_deporte($deporte);
+        $inscritos = $this->get_inscritos_escuela_deporte($escuela, $deporte);
 
         $data = [
             'facultad' => $facultad,

@@ -32,12 +32,12 @@
 
                                 <div class="flex mt-2 gap-x-2">
                                     @if (\Carbon\Carbon::parse($group_deporte['deporte']->fecha_limite)->isPast())
-                                        <a href="{{ route('reporte.index', ['deporte' => $group_deporte['deporte']]) }}"
+                                        <a href="{{ route('delegado.inscritos', ['escuela' => $escuela, 'deporte' => $group_deporte['deporte']]) }}"
                                             class="cursor-pointer bg-info hover:bg-info-600 text-xs uppercase font-semibold block p-1 py-2 w-full text-center rounded text-white">Reporte</a>
                                     @else
                                         <a href="{{ route('participante.index', ['rol' => $current_rol, 'deporte' => $group_deporte['deporte']]) }}"
                                             class="cursor-pointer bg-primary hover:bg-primary-600 text-xs uppercase font-semibold block p-1 py-2 w-1/2 text-center rounded text-white">Inscribir</a>
-                                        <a href="{{ route('reporte.index', ['deporte' => $group_deporte['deporte']]) }}"
+                                        <a href="{{ route('delegado.inscritos', ['escuela' => $escuela, 'deporte' => $group_deporte['deporte']]) }}"
                                             class="cursor-pointer bg-info hover:bg-info-600 text-xs uppercase font-semibold block p-1 py-2 w-1/2 text-center rounded text-white">Reporte</a>
                                     @endif
                                 </div>

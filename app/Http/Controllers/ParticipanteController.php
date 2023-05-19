@@ -15,7 +15,15 @@ class ParticipanteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+
+            if ($user && $user->tipo_id === 1) {
+                return $next($request);
+            }
+
+            return redirect()->route("handler.index");
+        });
     }
 
     public function get_active_roles()
@@ -53,7 +61,7 @@ class ParticipanteController extends Controller
 
         if ($fechaLimite->isPast()) {
             // La fecha límite ha pasado
-            return redirect()->route('user.index');
+            return redirect()->route('delegado.index');
         }
 
         $roles = $this->get_active_roles();
@@ -62,14 +70,14 @@ class ParticipanteController extends Controller
 
         $inscritos = $this->get_inscritos_escuela_deporte($escuela, $deporte);
 
-        return view("user.participantes", ["roles" => $roles, "current_rol" => $rol, "deporte" => $deporte, "inscritos" => $inscritos]);
+        return view("delegado.participantes", ["roles" => $roles, "current_rol" => $rol, "deporte" => $deporte, "inscritos" => $inscritos]);
     }
 
     public function formulario(Rol $rol, Deporte $deporte)
     {
         $roles = $this->get_active_roles();
 
-        return view("user.formulario_inscripcion", ["roles" => $roles, "current_rol" => $rol, "deporte" => $deporte]);
+        return view("delegado.formulario_inscripcion", ["roles" => $roles, "current_rol" => $rol, "deporte" => $deporte]);
     }
 
     public function store(Rol $rol, Deporte $deporte, Request $request)
@@ -90,8 +98,10 @@ class ParticipanteController extends Controller
             'ap_materno' => 'required|max:150',
         ]);
 
+        $escuela = auth()->user()->escuela;
+
         // verificar si ya se llego al maximo numero de inscritos
-        $inscritos = $this->get_inscritos_deporte($deporte);
+        $inscritos = $this->get_inscritos_escuela_deporte($escuela, $deporte);
 
         if ($inscritos->count() >= $deporte->num_max_players) {
             return redirect()->back()->with("error_num_limit_players", "Error, ya se alcanzó el numero maximo de participantes para este deporte.");
@@ -123,7 +133,7 @@ class ParticipanteController extends Controller
 
         $roles = $this->get_active_roles();
 
-        return view("user.participante_editar", ["roles" => $roles, "current_rol" => $rol, "deporte" => $deporte, "inscrito" => $inscrito]);
+        return view("delegado.participante_editar", ["roles" => $roles, "current_rol" => $rol, "deporte" => $deporte, "inscrito" => $inscrito]);
     }
 
     public function update(Rol $rol, Deporte $deporte, Inscrito $inscrito, Request $request)

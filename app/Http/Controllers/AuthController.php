@@ -29,7 +29,7 @@ class AuthController extends Controller
             return back()->with("message", "Credenciales incorrectas");
         }
 
-        return redirect()->route("user.index");
+        return redirect()->route("handler.index");
     }
 
     public function logout(Request $request)

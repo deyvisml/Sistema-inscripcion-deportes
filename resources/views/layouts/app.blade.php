@@ -51,7 +51,7 @@
             class="text-neutral-300 flex sm:gap-x-10 gap-x-4 items-center sm:justify-start justify-center sm:w-auto my-2">
             @foreach ($roles as $rol)
                 <li class="">
-                    <a href="{{ route('user.handler', ['rol' => $rol]) }}"
+                    <a href="{{ route('delegado.handler', ['rol' => $rol]) }}"
                         class="block cursor-pointer px-0.5 text-sm border-neutral-200 hover:text-white @if ($rol['id'] == $current_rol['id']) border-b-2 text-white @endif">
                         {{ $rol['name'] }}
                     </a>
