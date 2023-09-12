@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
 
-    @vite('resources/css/app.css', 'resources/js/app.js')
+    @vite('resources/css/app.css')
 </head>
 
 <body>

@@ -45,12 +45,19 @@
                 @if ($inscritos->count() == 0)
                     <p class="p-4 w-full text-center">No existen inscritos</p>
                 @else
-                    <table class="w-full mb-10 md:text-sm text-xs">
+                    <div>
+                        <label for="busqueda" class="text-sm font-semibold text-neutral-600 mb-1 block">Buscador</label>
+                        <input type="text" id="busqueda" placeholder="Buscar"
+                            class="block p-2 py-1 mb-4 md:w-1/2 w-full rounded shadow border border-gray-400 outline-none">
+
+                    </div>
+
+                    <table id="tabla" class="w-full mb-10 md:text-sm text-xs">
                         <thead class="bg-neutral-300">
                             <tr>
                                 <th class="border-2 p-1 py-2 border-neutral-300">#</th>
-                                <th class="border-2 p-1 py-2  border-neutral-300">Apelidos y nombres</th>
-                                <th class="border-2 p-1 py-2  border-neutral-300">Código</th>
+                                <th class="border-2 p-1 py-2 border-neutral-300">Apelidos y nombres</th>
+                                <th class="border-2 p-1 py-2 border-neutral-300">Código</th>
                                 <th class="border-2 p-1 py-2 border-neutral-300">Acciones</th>
                             </tr>
                         </thead>
@@ -157,3 +164,33 @@
         </div>
     </div>
 @endsection
+
+@push('js-scripts')
+    <script>
+        document.getElementById('busqueda').addEventListener('keyup', function() {
+            let input = this.value.toLowerCase();
+            let tabla = document.getElementById('tabla');
+            let filas = tabla.getElementsByTagName('tr');
+
+            for (let i = 1; i < filas.length; i++) {
+                let datos = filas[i].getElementsByTagName('td');
+                let mostrarFila = false;
+                for (let
+                        j = 0; j < datos.length; j++) {
+                    let texto = datos[j].innerHTML.toLowerCase();
+                    console.log(texto, input);
+                    if (texto.indexOf(input) > -1) {
+                        mostrarFila = true;
+                        break;
+                    }
+                }
+
+                if (mostrarFila) {
+                    filas[i].style.display = '';
+                } else {
+                    filas[i].style.display = 'none';
+                }
+            }
+        });
+    </script>
+@endpush

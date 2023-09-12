@@ -128,6 +128,7 @@ class ParticipanteController extends Controller
     {
         $inscrito = Inscrito::findOrFail($inscrito->id);
         if ($inscrito->user_id != auth()->user()->id) {
+            dd("xd");
             return redirect()->route("login");
         }
 
