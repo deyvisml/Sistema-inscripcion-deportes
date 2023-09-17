@@ -24,7 +24,7 @@
                 dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]
                 dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]
                 dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                    href="{{ route('participante.formulario', ['rol' => $current_rol, 'deporte' => $deporte]) }}">
+                    href="{{ route('inscrito.create', ['deporte' => $deporte]) }}">
                     Nueva inscripción
                 </a>
 
@@ -80,7 +80,7 @@
                                     </td>
                                     <td class="border-2 p-1 py-2 border-neutral-300">
                                         <div class="flex gap-x-2">
-                                            <a href="{{ route('participante.editar', ['rol' => $current_rol, 'deporte' => $deporte, 'inscrito' => $inscrito]) }}"
+                                            <a href="{{ route('inscrito.edit', ['deporte' => $deporte, 'inscrito' => $inscrito]) }}"
                                                 class="rounded block p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor"
@@ -91,7 +91,8 @@
                                             </a>
 
                                             <!-- Button trigger modal -->
-                                            <button type="button" data-te-toggle="modal" data-te-target="#exampleModal"
+                                            <button type="button" data-te-toggle="modal"
+                                                data-te-target="#deleteConfirmationModal{{ $i }}"
                                                 data-te-ripple-init data-te-ripple-color="light">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor"
@@ -104,8 +105,8 @@
                                             <!-- Modal -->
                                             <div data-te-modal-init
                                                 class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-                                                id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                aria-hidden="true">
+                                                id="deleteConfirmationModal{{ $i }}" tabindex="-1"
+                                                aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
                                                 <div data-te-modal-dialog-ref
                                                     class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px]">
                                                     <div
@@ -114,7 +115,7 @@
                                                             class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                                                             <!--Modal title-->
                                                             <h5 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
-                                                                id="exampleModalLabel">
+                                                                id="deleteConfirmationModalLabel">
                                                                 Confirmación
                                                             </h5>
                                                             <!--Close button-->
@@ -145,7 +146,7 @@
                                                                 data-te-ripple-color="light">
                                                                 Cerrar
                                                             </button>
-                                                            <a href="{{ route('participante.borrar', ['rol' => $current_rol, 'deporte' => $deporte, 'inscrito' => $inscrito]) }}"
+                                                            <a href="{{ route('inscrito.delete', ['deporte' => $deporte, 'inscrito' => $inscrito]) }}"
                                                                 class="inline-block rounded bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]"
                                                                 data-te-ripple-init data-te-ripple-color="light">
                                                                 Borrar

@@ -48,26 +48,28 @@
         </div>
 
         <ul
-            class="text-neutral-300 flex sm:gap-x-10 gap-x-4 items-center sm:justify-start justify-center sm:w-auto my-2">
-            @foreach ($roles as $rol)
-                <li class="">
-                    <a href="{{ route('delegado.handler', ['rol' => $rol]) }}"
-                        class="block cursor-pointer px-0.5 text-sm border-neutral-200 hover:text-white @if ($rol['id'] == $current_rol['id']) border-b-2 text-white @endif">
-                        {{ $rol['name'] }}
+            class="text-neutral-300 flex sm:gap-x-5 gap-x-4 items-center sm:justify-start justify-center sm:w-auto my-2">
+            @foreach ($permissions as $permission)
+                <li class="w-auto">
+                    <a href="{{ route($permission->route_name) }}"
+                        class="cursor-pointer px-0.5 text-sm border-neutral-200 hover:text-white @if ($permission['id'] == $current_permission['id']) border-b-2 text-white @endif">
+                        {{ $permission['name'] }}
                     </a>
                 </li>
             @endforeach
 
-            <a href="{{ route('login.logout') }}"
-                class=" cursor-pointer bg-danger hover:bg-danger-600 text-xs uppercase font-semibold  px-2.5 py-1.5 w-full text-center rounded text-white flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-5 h-5 inline-block me-1">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                </svg>
-                Salir
-            </a>
+
         </ul>
+
+        <a href="{{ route('login.logout') }}"
+            class="cursor-pointer bg-danger hover:bg-danger-600 text-xs uppercase font-semibold  px-2.5 py-1.5 w-full sm:w-auto text-center rounded text-white flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-5 h-5 inline-block me-1">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+            </svg>
+            Salir
+        </a>
 
         <div class="w-auto my-2 justify-self-center flex justify-end ml-auto">
             <div class="relative" data-te-dropdown-ref>

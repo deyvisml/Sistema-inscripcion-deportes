@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Rol;
 use App\Models\Acceso;
+use App\Models\School;
 use App\Models\Deporte;
-use App\Models\Escuela;
 use App\Models\Inscrito;
+use PDF;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 class ReporteController extends Controller
@@ -16,24 +18,19 @@ class ReporteController extends Controller
         $this->middleware('auth');
     }
 
-    public function get_active_roles()
+    public function index(Deporte $deporte)
     {
-        $tipo = auth()->user()->tipo;
+        $user = auth()->user();
+        $current_permission = Permission::find(1);
+        $permissions = $user->permissions();
+        $escuela = $user->escuela;
 
-        $roles = Acceso::join("tipos", "accesos.tipo_id", "=", "tipos.id")
-            ->join("roles", "accesos.rol_id", "=", "roles.id")
-            ->join("estados", "accesos.estado_id", "=", "estados.id")
-            ->where("tipos.id", "=", $tipo["id"])
-            ->where("estados.name", "=", "activo")
-            ->pluck("roles.id")
-            ->all();
+        $inscritos = $this->get_inscritos_escuela_deporte($escuela, $deporte);
 
-        $roles = Rol::whereIn("id", $roles)->get();
-
-        return $roles;
+        return view("reporte.index", ["permissions" => $permissions, "current_permission" => $current_permission, "escuela" => $escuela, "deporte" => $deporte, "inscritos" => $inscritos]);
     }
 
-    public function get_inscritos_escuela_deporte(Escuela $escuela, Deporte $deporte)
+    public function get_inscritos_escuela_deporte(School $escuela, Deporte $deporte)
     {
         $inscrito = 1;
 
@@ -45,24 +42,35 @@ class ReporteController extends Controller
         return $inscritos;
     }
 
-    public function index(Deporte $deporte)
+    public function inscritos_by_escuela_deporte(School $escuela, Deporte $deporte)
     {
-        $rol = Rol::find(1);
-        $roles = $this->get_active_roles();
-
-        $escuela = auth()->user()->escuela;
-
         $inscritos = $this->get_inscritos_escuela_deporte($escuela, $deporte);
 
-        return view("reporte.index", ["roles" => $roles, "current_rol" => $rol, "escuela" => $escuela, "deporte" => $deporte, "inscritos" => $inscritos]);
+        $user = auth()->user();
+        $current_permission = Permission::find(2);
+        $permissions = $user->permissions();
+
+        return view("reporte.index", ["permissions" => $permissions, "current_permission" => $current_permission, "escuela" => $escuela, "deporte" => $deporte, "inscritos" => $inscritos]);
     }
 
-    public function inscritos_by_escuela_deporte(Rol $rol, Escuela $escuela, Deporte $deporte)
-    {
-        $roles = $this->get_active_roles();
 
+    public function generatePDF(Deporte $deporte)
+    {
+        $escuela = auth()->user()->escuela;
+        $facultad = $escuela->facultad;
         $inscritos = $this->get_inscritos_escuela_deporte($escuela, $deporte);
 
-        return view("reporte.index", ["roles" => $roles, "current_rol" => $rol, "escuela" => $escuela, "deporte" => $deporte, "inscritos" => $inscritos]);
+        $data = [
+            'facultad' => $facultad,
+            'escuela' => $escuela,
+            'deporte' => $deporte,
+            'inscritos' => $inscritos,
+            'date' => date('m/d/Y'),
+        ];
+
+        //return view("reporte.pdf", $data);
+        $pdf = PDF::loadView('reporte.pdf', $data)->setOptions(['defaultFont' => 'sans-serif']);
+
+        return $pdf->download($escuela->name . " - " . $deporte->name . '.pdf');
     }
 }

@@ -14,8 +14,8 @@
                 <h3 class="text-2xl w-full pb-1 border-neutral-200 text-center p-2">Nueva
                     inscripción</h3>
 
-                <form action="{{ route('participante.store', ['rol' => $current_rol, 'deporte' => $deporte]) }}"
-                    method="post" class="p-4 md:text-base text-sm">
+                <form action="{{ route('inscrito.store', ['deporte' => $deporte]) }}" method="post"
+                    class="p-4 md:text-base text-sm">
 
                     @if (session('error_num_limit_players'))
                         <p class="bg-red-500 text-white text-sm p-1 text-center my-1">
@@ -71,8 +71,7 @@
                     </div>
 
                     <input type="submit" value="Inscribir" data-te-ripple-init data-te-ripple-color="light"
-                        class="w-full mt-2 ml-auto inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-sm cursor-pointer font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                        href="{{ route('participante.formulario', ['rol' => $current_rol, 'deporte' => $deporte]) }}">
+                        class="w-full mt-2 ml-auto inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-sm cursor-pointer font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
                 </form>
             </div>
         </div>

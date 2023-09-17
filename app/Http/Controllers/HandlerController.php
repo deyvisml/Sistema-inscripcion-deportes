@@ -15,24 +15,28 @@ class HandlerController extends Controller
 
     public function index()
     {
-        $tipo_usuario = auth()->user()->tipo_id;
+        // redirige a la aplicación
 
-        return $this->handler($tipo_usuario);
-    }
+        $user = auth()->user();
 
-    public function handler($tipo_usuario)
-    {
-        switch ($tipo_usuario) {
-            case '1':
-                $user_controller = new UserController;
-                return $user_controller->index();
-                break;
-            case '2':
-                $organizador_controller = new OrganizadorController;
-                return $organizador_controller->index();
-            default:
-                // si el id rol es desconocido
-                break;
+        $roles = $user->roles;
+
+        if (count($roles) == 0) {
+            abort(403, 'No tienes permiso para realizar esta acción.');
+            return;
         }
+
+        $first_role = $roles[0];
+        $permissions = $first_role->permissions;
+
+        if (count($permissions) == 0) {
+            abort(403, 'No tienes permiso para realizar esta acción.');
+            return;
+        }
+
+        $first_permission = $permissions[0];
+        $permission_route_name = $first_permission->route_name;
+
+        return redirect()->route($permission_route_name);
     }
 }

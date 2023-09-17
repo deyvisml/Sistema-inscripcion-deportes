@@ -13,9 +13,8 @@
 
                 <h3 class="text-2xl w-full pb-1 border-neutral-200 text-center p-2">Editar inscrito</h3>
 
-                <form
-                    action="{{ route('participante.editar', ['rol' => $current_rol, 'deporte' => $deporte, 'inscrito' => $inscrito]) }}"
-                    method="post" class="p-4 md:text-base text-sm">
+                <form action="{{ route('inscrito.update', ['deporte' => $deporte, 'inscrito' => $inscrito]) }}" method="post"
+                    class="p-4 md:text-base text-sm">
 
                     @csrf
 
@@ -65,12 +64,10 @@
                     </div>
 
                     <input type="submit" value="Editar" data-te-ripple-init data-te-ripple-color="light"
-                        class="w-full mt-2 ml-auto inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-sm cursor-pointer font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                        href="{{ route('participante.formulario', ['rol' => $current_rol, 'deporte' => $deporte]) }}">
-
+                        class="w-full mt-2 ml-auto inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-sm cursor-pointer font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
 
                     <a class="w-full text-center text-sm block rounded bg-green-500 hover:bg-green-600 cursor-pointer my-2 px-6 pb-2 pt-2.5 font-medium uppercase leading-normal text-white"
-                        href="{{ route('participante.index', ['rol' => $current_rol, 'deporte' => $deporte]) }}">Volver</a>
+                        href="{{ route('inscrito.index', ['deporte' => $deporte]) }}">Volver</a>
 
                 </form>
             </div>

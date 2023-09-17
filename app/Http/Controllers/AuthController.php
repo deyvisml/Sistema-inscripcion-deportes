@@ -29,7 +29,8 @@ class AuthController extends Controller
             return back()->with("message", "Credenciales incorrectas");
         }
 
-        return redirect()->route("handler.index");
+        $handler_controller = new HandlerController;
+        return $handler_controller->index();
     }
 
     public function logout(Request $request)

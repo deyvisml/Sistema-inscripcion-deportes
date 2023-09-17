@@ -13,7 +13,7 @@
                 @if ($inscritos->count() > 0)
                     <a data-te-ripple-init data-te-ripple-color="light"
                         class="mb-4 ml-auto inline-block rounded bg-danger hover:bg-danger-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 "
-                        href="{{ route('reporte.pdf', ['escuela' => $escuela, 'deporte' => $deporte]) }}">
+                        href="{{ route('reporte.pdf', ['deporte' => $deporte]) }}">
                         Generar PDF
                     </a>
                 @endif

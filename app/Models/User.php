@@ -24,7 +24,6 @@ class User extends Authenticatable
         'ap_paterno',
         'ap_materno',
         'escuela_id',
-        'tipo_id',
     ];
 
     /**
@@ -46,18 +45,53 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function escuela()
-    {
-        return $this->belongsTo(Escuela::class);
-    }
-
-    public function tipo()
-    {
-        return $this->belongsTo(Tipo::class);
-    }
-
     public function roles()
     {
-        return $this->tipo->roles();
+        return $this->belongsToMany(Role::class, "role_user");
+    }
+
+    public function assignRole(Role $role)
+    {
+        return $this->roles()->save($role);
+    }
+
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains("name", $role);
+        }
+        return !!$role->intersect($this->roles)->count();
+    }
+
+    /**
+     * Deterimne is the current user has the given permission (very usefull)
+     *
+     * @param Permission $permission
+     * @param User $user
+     * @return boolean
+     */
+    public function hasPermission(Permission $permission)
+    {
+        return $this->hasRole($permission->roles);
+    }
+
+    public function permissions()
+    {
+        $roles = $this->roles;
+
+
+        $permissions = collect();
+        foreach ($roles as $role) {
+            $permissions = $permissions->merge($role->permissions);
+        }
+
+        //return $permissions;
+        return $permissions->unique('id');
+    }
+
+
+    public function escuela()
+    {
+        return $this->belongsTo(School::class);
     }
 }
