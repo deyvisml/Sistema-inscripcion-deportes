@@ -16,7 +16,7 @@ class UserController extends Controller
         $this->middleware(function ($request, $next) {
             $user = auth()->user();
 
-            if ($user && $user->tipo_id === 1) {
+            if ($user && $user->tipo_id == 1) {
                 return $next($request);
             }
 
@@ -60,7 +60,7 @@ class UserController extends Controller
     {
         $escuela = auth()->user()->escuela;
 
-        $deportes = Deporte::orderBy("name", "ASC")->get();
+        $deportes = Deporte::orderBy("order", "ASC")->get();
 
         $group_deportes = array();
 

@@ -105,7 +105,7 @@
             const eye = document.querySelector("#eye");
             const hidden_eye = document.querySelector("#hidden_eye");
 
-            if (password.type === "password") {
+            if (password.type == "password") {
                 password.type = "text";
 
                 eye.classList.add("hidden")

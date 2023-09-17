@@ -33,6 +33,7 @@
                                 <th class="border-2 p-1 py-2 border-neutral-300">#</th>
                                 <th class="border-2 p-1 py-2  border-neutral-300">Apelidos y nombres</th>
                                 <th class="border-2 p-1 py-2  border-neutral-300">Código</th>
+                                <th class="border-2 p-1 py-2  border-neutral-300">DNI</th>
                                 <th class="border-2 p-1 py-2 border-neutral-300">Fecha de inscripción</th>
                             </tr>
                         </thead>
@@ -48,6 +49,9 @@
                                     </td>
                                     <td class="border-2 p-1 py-2 border-neutral-300 uppercase">
                                         {{ $inscrito['codigo'] }}
+                                    </td>
+                                    <td class="border-2 p-1 py-2 border-neutral-300 uppercase">
+                                        {{ $inscrito['dni'] }}
                                     </td>
                                     <td class="border-2 p-1 py-2 border-neutral-300 uppercase">
                                         {{ \Carbon\Carbon::parse($inscrito['created_at'])->format('d/m/Y') }}

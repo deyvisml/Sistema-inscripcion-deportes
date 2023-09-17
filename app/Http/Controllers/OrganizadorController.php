@@ -19,7 +19,7 @@ class OrganizadorController extends Controller
         $this->middleware(function ($request, $next) {
             $user = auth()->user();
 
-            if ($user && $user->tipo_id === 2) {
+            if ($user && $user->tipo_id == 2) {
                 return $next($request);
             }
 

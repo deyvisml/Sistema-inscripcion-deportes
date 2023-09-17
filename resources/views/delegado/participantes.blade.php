@@ -58,6 +58,7 @@
                                 <th class="border-2 p-1 py-2 border-neutral-300">#</th>
                                 <th class="border-2 p-1 py-2 border-neutral-300">Apelidos y nombres</th>
                                 <th class="border-2 p-1 py-2 border-neutral-300">Código</th>
+                                <th class="border-2 p-1 py-2 border-neutral-300">DNI</th>
                                 <th class="border-2 p-1 py-2 border-neutral-300">Acciones</th>
                             </tr>
                         </thead>
@@ -71,8 +72,11 @@
                                     <td class="border-2 p-1 py-2 border-neutral-300 uppercase">
                                         {{ $inscrito['ap_paterno'] . ' ' . $inscrito['ap_materno'] . ' ' . $inscrito['name'] }}
                                     </td>
-                                    <td class="border-2 p-1 py-2 border-neutral-300 uppercase">
+                                    <td class="border-2 p-1 py-2 border-neutral-300 ">
                                         {{ $inscrito['codigo'] }}
+                                    </td>
+                                    <td class="border-2 p-1 py-2 border-neutral-300">
+                                        {{ $inscrito['dni'] }}
                                     </td>
                                     <td class="border-2 p-1 py-2 border-neutral-300">
                                         <div class="flex gap-x-2">

@@ -67,12 +67,18 @@
         td {
             text-transform: uppercase;
         }
+
+        .header-image {
+            width: 100%;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
 
 <body>
-    <h2 class="titulo">Universidad Nacional del Altiplano - Puno</h2>
+    <img class="header-image"
+        src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/header.png'))) }}">
     <p class="escpecificacion"><span>Fecha:</span> {{ $date }}</p>
     <p class="escpecificacion"><span>Facultad:</span> {{ $facultad->name }}</p>
     <p class="escpecificacion"><span>Escuela:</span> {{ $escuela->name }}</p>
@@ -87,6 +93,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Apellidos y nombres</th>
                 <th scope="col">Código</th>
+                <th scope="col">DNI</th>
                 <th scope="col">Fecha de inscripción</th>
             </tr>
         </thead>
@@ -102,7 +109,11 @@
                         {{ $inscrito->ap_paterno . ' ' . $inscrito->ap_materno . ' ' . $inscrito->name }}
                     </td>
                     <td>
-                        {{ $inscrito->codigo }}</td>
+                        {{ $inscrito->codigo }}
+                    </td>
+                    <td>
+                        {{ $inscrito->dni }}
+                    </td>
                     <td>
                         {{ \Carbon\Carbon::parse($inscrito['created_at'])->format('d/m/Y') }}
                     </td>

@@ -18,7 +18,7 @@ class ParticipanteController extends Controller
         $this->middleware(function ($request, $next) {
             $user = auth()->user();
 
-            if ($user && $user->tipo_id === 1) {
+            if ($user && $user->tipo_id == 1) {
                 return $next($request);
             }
 
@@ -91,11 +91,12 @@ class ParticipanteController extends Controller
 
         $roles = $this->get_active_roles();
 
-        $validated = $request->validate([
+        $request->validate([
             "codigo" => "required|numeric|digits:6",
             'name' => 'required|max:150',
             'ap_paterno' => 'required|max:150',
             'ap_materno' => 'required|max:150',
+            'dni' => 'required|numeric|digits:8',
         ]);
 
         $escuela = auth()->user()->escuela;
@@ -115,6 +116,7 @@ class ParticipanteController extends Controller
             "name" => $request["name"],
             "ap_paterno" => $request["ap_paterno"],
             "ap_materno" => $request["ap_materno"],
+            "dni" => $request["dni"],
             "user_id" => $user->id,
             "escuela_id" => $escuela->id,
             "deporte_id" => $deporte->id,
@@ -128,7 +130,6 @@ class ParticipanteController extends Controller
     {
         $inscrito = Inscrito::findOrFail($inscrito->id);
         if ($inscrito->user_id != auth()->user()->id) {
-            dd("xd");
             return redirect()->route("login");
         }
 
@@ -146,18 +147,20 @@ class ParticipanteController extends Controller
 
         $roles = $this->get_active_roles();
 
-        $validated = $request->validate([
+        $request->validate([
             "codigo" => "required|numeric|digits:6",
             'name' => 'required|max:150',
             'ap_paterno' => 'required|max:150',
             'ap_materno' => 'required|max:150',
+            'dni' => 'required|numeric|digits:8',
         ]);
 
         $inscrito->update([
             "codigo" => $request["codigo"],
             "name" => $request["name"],
             "ap_paterno" => $request["ap_paterno"],
-            "ap_materno" => $request["ap_materno"]
+            "ap_materno" => $request["ap_materno"],
+            'dni' => $request["dni"],
         ]);
 
         return redirect()->route("participante.index", ["roles" => $roles, "rol" => $rol, "deporte" => $deporte])->with("update_success", "Se actualizó exitosamente.");

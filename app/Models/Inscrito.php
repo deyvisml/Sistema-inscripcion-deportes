@@ -14,6 +14,7 @@ class Inscrito extends Model
         "name",
         "ap_paterno",
         "ap_materno",
+        "dni",
         "user_id",
         "escuela_id",
         "deporte_id",

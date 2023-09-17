@@ -7,14 +7,18 @@
 @section('content')
     <div class="bg-neutral-200 w-full h-full py-6 md:px-32 sm:px-10">
         <div class="md:p-4 p-2 py-4 bg-neutral-50 border shadow-xl">
-            <h2 class="text-2xl font-semibold w-full border-b-2 pb-1 mb-4 border-neutral-200">Deportes</h2>
+            <h2 class="text-2xl font-semibold w-full border-b-2 pb-3 mb-6 border-neutral-200 text-center font-sans">
+                Olimpiadas Inter
+                Escuelas
+                Profesionales UNA-PUNO 2023</h2>
 
             <ul class="flex flex-wrap md:gap-4 gap-10">
                 @foreach ($group_deportes as $group_deporte)
                     <li class="sm:w-56 w-full ">
                         <div class="bg-white border-2 rounded-lg overflow-hidden shadow ">
                             <div class="w-full bg-gray-600 h-32 overflow-hidden relative ">
-                                <p class="text-white font-semibold absolute z-20 inset-0 flex items-center justify-center ">
+                                <p
+                                    class="text-white font-semibold absolute z-20 inset-0 flex items-center justify-center text-center p-1.5">
                                     {{ $group_deporte['deporte']['name'] }}</p>
                                 <img src="{{ asset('deportes/' . $group_deporte['deporte']['image']) }}" alt=""
                                     class="object-cover w-full h-full z-10 opacity-40 ">
