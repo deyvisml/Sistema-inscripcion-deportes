@@ -115,15 +115,27 @@
 
         .firma-cell {
             width: 30% !important;
+            text-transform: uppercase;
+            font-size: 10px;
         }
 
         .space-cell {
-            max-width: 5% !important;
+            /*max-width: 5% !important;*/
+
         }
 
         .label-firma {
             border-top: 2px solid black;
             padding: 5px 2px;
+        }
+
+        p.datos-firma {
+            padding: 0px;
+            margin: 1px;
+        }
+
+        p.label-author-firma {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -202,9 +214,13 @@
     <table class="firmas-table">
         <tbody>
             <tr>
+                <td class="space-cell">
+
+                </td>
                 <td class="firma-cell">
                     <div class="label-firma">
-                        Firma Presidente 01
+                        <!--<p class="datos-firma autor-firma">Deyvis Mamani Lacuta</p>-->
+                        <p class="datos-firma label-author-firma">Delegado General</p>
                     </div>
                 </td>
                 <td class="space-cell">
@@ -212,16 +228,12 @@
                 </td>
                 <td class="firma-cell">
                     <div class="label-firma">
-                        Firma Presidente 01
+                        <!--<p class="datos-firma autor-firma">Deyvis Mamani Lacuta</p>-->
+                        <p class="datos-firma label-author-firma">Delegado de Deporte</p>
                     </div>
                 </td>
                 <td class="space-cell">
 
-                </td class="firma-cell">
-                <td class="firma-cell">
-                    <div class="label-firma">
-                        Firma Presidente 01
-                    </div>
                 </td>
             </tr>
         </tbody>
