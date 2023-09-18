@@ -41,7 +41,7 @@ class InscriptionController extends Controller
             $group_deportes[$i]["num_inscritos"] = $this->get_inscritos_escuela_deporte($escuela, $deporte)->count();
         }
 
-        return view("delegado.inscribir", ["permissions" => $permissions, "current_permission" => $current_permission, "escuela" => $escuela, "group_deportes" => $group_deportes]);
+        return view("inscripcion", ["permissions" => $permissions, "current_permission" => $current_permission, "escuela" => $escuela, "group_deportes" => $group_deportes]);
     }
 
     public function get_inscritos_escuela_deporte(School $escuela, Deporte $deporte)

@@ -35,7 +35,7 @@ class ReporteJudadoresController extends Controller
 
         $group_deportes = array();
 
-        return view("organizador.filtro", ["permissions" => $permissions, "current_permission" => $current_permission, "facultades" => $facultades, "escuelas" => $escuelas, "facultad" => $facultad, "escuela" => $escuela,  "group_deportes" => $group_deportes]);
+        return view("reporte_jugadores", ["permissions" => $permissions, "current_permission" => $current_permission, "facultades" => $facultades, "escuelas" => $escuelas, "facultad" => $facultad, "escuela" => $escuela,  "group_deportes" => $group_deportes]);
     }
 
     public function filter(Request $request)
@@ -71,7 +71,7 @@ class ReporteJudadoresController extends Controller
             $group_deportes[$i]["num_inscritos"] = $this->get_inscritos_escuela_deporte($escuela, $deporte)->count();
         }
 
-        return view("organizador.filtro", ["permissions" => $permissions, "current_permission" => $current_permission, "facultades" => $facultades, "escuelas" => $escuelas, "facultad" => $facultad, "escuela" => $escuela,  "group_deportes" => $group_deportes]);
+        return view("reporte_jugadores", ["permissions" => $permissions, "current_permission" => $current_permission, "facultades" => $facultades, "escuelas" => $escuelas, "facultad" => $facultad, "escuela" => $escuela,  "group_deportes" => $group_deportes]);
     }
 
     public function get_inscritos_escuela_deporte(School $escuela, Deporte $deporte)

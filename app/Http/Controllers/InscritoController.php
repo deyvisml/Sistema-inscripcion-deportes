@@ -37,7 +37,7 @@ class InscritoController extends Controller
 
         $inscritos = $this->get_inscritos_escuela_deporte($escuela, $deporte);
 
-        return view("delegado.participantes", ["permissions" => $permissions, "current_permission" => $current_permission, "deporte" => $deporte, "inscritos" => $inscritos]);
+        return view("inscrito.index", ["permissions" => $permissions, "current_permission" => $current_permission, "deporte" => $deporte, "inscritos" => $inscritos]);
     }
 
     public function create(Deporte $deporte)
@@ -46,7 +46,7 @@ class InscritoController extends Controller
         $current_permission = Permission::find(1);
         $permissions = $user->permissions();
 
-        return view("delegado.formulario_inscripcion", ["permissions" => $permissions, "current_permission" => $current_permission, "deporte" => $deporte]);
+        return view("inscrito.create", ["permissions" => $permissions, "current_permission" => $current_permission, "deporte" => $deporte]);
     }
 
     public function store(Deporte $deporte, Request $request)
@@ -106,7 +106,7 @@ class InscritoController extends Controller
         $current_permission = Permission::find(1); // 1 means inscription
         $permissions = $user->permissions();
 
-        return view("delegado.participante_editar", ["permissions" => $permissions, "current_permission" => $current_permission, "deporte" => $deporte, "inscrito" => $inscrito]);
+        return view("inscrito.edit", ["permissions" => $permissions, "current_permission" => $current_permission, "deporte" => $deporte, "inscrito" => $inscrito]);
     }
 
     public function update(Deporte $deporte, Inscrito $inscrito, Request $request)

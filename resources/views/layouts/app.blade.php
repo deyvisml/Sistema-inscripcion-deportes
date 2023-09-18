@@ -48,7 +48,7 @@
         </div>
 
         <ul
-            class="text-neutral-300 flex sm:gap-x-5 gap-x-4 items-center sm:justify-start justify-center sm:w-auto my-2">
+            class="text-neutral-300 flex w-full flex-col sm:flex-row sm:gap-x-5 gap-x-4 sm:items-center sm:justify-start items-start sm:w-auto my-2">
             @foreach ($permissions as $permission)
                 <li class="w-auto">
                     <a href="{{ route($permission->route_name) }}"
@@ -62,7 +62,7 @@
         </ul>
 
         <a href="{{ route('login.logout') }}"
-            class="cursor-pointer bg-danger hover:bg-danger-600 text-xs uppercase font-semibold  px-2.5 py-1.5 w-full sm:w-auto text-center rounded text-white flex items-center">
+            class="cursor-pointer bg-danger hover:bg-danger-600 text-xs uppercase font-semibold  px-2.5 py-1.5 hidden sm:w-auto text-center rounded text-white flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-5 h-5 inline-block me-1">
                 <path stroke-linecap="round" stroke-linejoin="round"

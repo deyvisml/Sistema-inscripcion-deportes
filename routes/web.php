@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DelegadoController;
 use App\Http\Controllers\HandlerController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\InscritoController;
@@ -32,21 +33,24 @@ Route::get("/logout", [AuthController::class, "logout"])->name("login.logout");
 
 /* ======== FIXING THE ROUTES ========*/
 
-Route::get("/inscripcion", [InscriptionController::class, "index"])->name("inscription.index");
+Route::get("/inscripcion_jugadores", [InscriptionController::class, "index"])->name("inscription.index");
 
-Route::get("/inscripcion/inscritos/deporte/{deporte}", [InscritoController::class, "index"])->name("inscrito.index");
+Route::get("/inscripcion_jugadores/inscritos/deporte/{deporte}", [InscritoController::class, "index"])->name("inscrito.index");
 
-Route::get("/inscripcion/inscritos/deporte/{deporte}/inscribir", [InscritoController::class, "create"])->name("inscrito.create");
-Route::post("/inscripcion/inscritos/deporte/{deporte}/inscribir", [InscritoController::class, "store"])->name("inscrito.store");
+Route::get("/inscripcion_jugadores/inscritos/deporte/{deporte}/inscribir", [InscritoController::class, "create"])->name("inscrito.create");
+Route::post("/inscripcion_jugadores/inscritos/deporte/{deporte}/inscribir", [InscritoController::class, "store"])->name("inscrito.store");
+Route::get("/inscripcion_jugadores/inscritos/deporte/{deporte}/editar/{inscrito}", [InscritoController::class, "edit"])->name("inscrito.edit");
+Route::post("/inscripcion_jugadores/inscritos/deporte/{deporte}/editar/{inscrito}", [InscritoController::class, "update"])->name("inscrito.update");
+Route::get("/inscripcion_jugadores/inscritos/deporte/{deporte}/eliminar/{inscrito}", [InscritoController::class, "delete"])->name("inscrito.delete");
 
-Route::get("/inscripcion/inscritos/deporte/{deporte}/editar/{inscrito}", [InscritoController::class, "edit"])->name("inscrito.edit");
-Route::post("/inscripcion/inscritos/deporte/{deporte}/editar/{inscrito}", [InscritoController::class, "update"])->name("inscrito.update");
+Route::get("/inscripcion_jugadores/inscritos/reporte/deporte/{deporte}", [ReporteController::class, "index"])->name("reporte.index");
+Route::get("/inscripcion_jugadores/inscritos/reporte/deporte/{deporte}/pdf", [ReporteController::class, "generatePDF"])->name("reporte.pdf");
 
-Route::get("/inscripcion/inscritos/deporte/{deporte}/eliminar/{inscrito}", [InscritoController::class, "delete"])->name("inscrito.delete");
-
-Route::get("/inscripcion/inscritos/reporte/deporte/{deporte}", [ReporteController::class, "index"])->name("reporte.index");
-
-Route::get("/inscripcion/inscritos/reporte/deporte/{deporte}/pdf", [ReporteController::class, "generatePDF"])->name("reporte.pdf");
+Route::get("/inscripcion_delegados", [DelegadoController::class, "index"])->name("delegado.index");
+Route::get("/inscripcion_delegados/deportes/{deporte}/inscribir", [DelegadoController::class, "create"])->name("delegado.create");
+Route::post("/inscripcion_delegados/deportes/{deporte}/inscribir", [DelegadoController::class, "store"])->name("delegado.store");
+Route::get("/inscripcion_delegados/delegados/{delegado}/editar", [DelegadoController::class, "edit"])->name("delegado.edit");
+Route::post("/inscripcion_delegados/delegados/{delegado}/editar", [DelegadoController::class, "update"])->name("delegado.update");
 
 /* ============================ */
 
