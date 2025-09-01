@@ -38,82 +38,86 @@
 
 <body class="">
 
-    <nav
-        class="flex flex-wrap md:px-32 sm:px-10 px-4 items-center py-2 bg-[#2d2e48] sm:gap-x-4 gap-x-2 border-b-4 border-neutral-300">
-        <div class="flex items-center md:justify-between justify-center flex-wrap md:w-2/12 w-full">
-            <a href="/" class="w-auto">
-                <img src="{{ asset('https://aulavirtual2.unap.edu.pe/images/logos/unap/logo.png') }}" alt="imagen logo"
-                    class="object-contain max-h-[70px] py-2">
-            </a>
-        </div>
-
-        <ul
-            class="text-neutral-300 flex w-full flex-col sm:flex-row sm:gap-x-5 gap-x-4 sm:items-center sm:justify-start items-start sm:w-auto my-2">
-            @foreach ($permissions as $permission)
-                <li class="w-auto">
-                    <a href="{{ route($permission->route_name) }}"
-                        class="cursor-pointer px-0.5 text-sm border-neutral-200 hover:text-white @if ($permission['id'] == $current_permission['id']) border-b-2 text-white @endif">
-                        {{ $permission['name'] }}
+    <div class="flex flex-col min-h-screen">
+        <header>
+            <nav
+                class="flex flex-wrap items-center gap-x-2 sm:gap-x-4 bg-[#2d2e48] px-4 sm:px-10 md:px-32 py-2 border-neutral-300 border-b-4">
+                <div class="flex flex-wrap justify-center md:justify-between items-center w-full md:w-2/12">
+                    <a href="/" class="w-auto">
+                        <img src="{{ asset('https://aulavirtual2.unap.edu.pe/images/logos/unap/logo.png') }}" alt="imagen logo"
+                            class="py-2 max-h-[70px] object-contain">
                     </a>
-                </li>
-            @endforeach
+                </div>
+
+                <ul
+                    class="flex sm:flex-row flex-col sm:justify-start items-start sm:items-center gap-x-4 sm:gap-x-5 my-2 w-full sm:w-auto text-neutral-300">
+                    @foreach ($permissions as $permission)
+                        <li class="w-auto">
+                            <a href="{{ route($permission->route_name) }}"
+                                class="cursor-pointer px-0.5 text-sm border-neutral-200 hover:text-white @if ($permission['id'] == $current_permission['id']) border-b-2 text-white @endif">
+                                {{ $permission['name'] }}
+                            </a>
+                        </li>
+                    @endforeach
 
 
-        </ul>
-
-        <a href="{{ route('login.logout') }}"
-            class="cursor-pointer bg-danger hover:bg-danger-600 text-xs uppercase font-semibold  px-2.5 py-1.5 hidden sm:w-auto text-center rounded text-white flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-5 h-5 inline-block me-1">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-            </svg>
-            Salir
-        </a>
-
-        <div class="w-auto my-2 justify-self-center flex justify-end ml-auto">
-            <div class="relative" data-te-dropdown-ref>
-                <!-- Second dropdown trigger -->
-                <a class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none justify-center cursor-pointer"
-                    href="#" id="dropdownMenuButton2" role="button" data-te-dropdown-toggle-ref
-                    aria-expanded="false">
-                    <!-- User avatar -->
-                    <div
-                        class="w-9 h-9 rounded-full border-neutral-300 border-2 me-2 flex justify-center items-center overflow-hidden bg-neutral-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                        </svg>
-                    </div>
-                    <p class="text-neutral-100 me-1 text-sm cursor-pointer uppercase">
-                        {{ auth()->user()->name . ' ' . auth()->user()->ap_paterno }}</p>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-4 h-4 text-neutral-100">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </a>
-                <!-- Second dropdown menu -->
-                <ul class="w-20 absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
-                    aria-labelledby="dropdownMenuButton2" data-te-dropdown-menu-ref>
-                    <!-- Second dropdown menu items -->
-                    <li>
-                        <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                            href="{{ route('login.logout') }}" data-te-dropdown-item-ref>Salir</a>
-                    </li>
                 </ul>
-            </div>
-        </div>
-    </nav>
 
-    <main class="bg-white">
-        @yield('content')
-    </main>
+                <a href="{{ route('login.logout') }}"
+                    class="hidden flex items-center bg-danger hover:bg-danger-600 px-2.5 py-1.5 rounded sm:w-auto font-semibold text-white text-xs text-center uppercase cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="inline-block me-1 w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                    Salir
+                </a>
 
-    <footer class="h-24 bg-neutral-200 flex justify-center items-center">
-        <p class="text-center">© UNA PUNO 2023</p>
-    </footer>
+                <div class="flex justify-end justify-self-center my-2 ml-auto w-auto">
+                    <div class="relative" data-te-dropdown-ref>
+                        <!-- Second dropdown trigger -->
+                        <a class="hidden-arrow flex justify-center items-center whitespace-nowrap transition motion-reduce:transition-none duration-150 ease-in-out cursor-pointer"
+                            href="#" id="dropdownMenuButton2" role="button" data-te-dropdown-toggle-ref
+                            aria-expanded="false">
+                            <!-- User avatar -->
+                            <div
+                                class="flex justify-center items-center bg-neutral-100 me-2 border-2 border-neutral-300 rounded-full w-9 h-9 overflow-hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                            </div>
+                            <p class="me-1 text-neutral-100 text-sm uppercase cursor-pointer">
+                                {{ auth()->user()->name . ' ' . auth()->user()->ap_paterno }}</p>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-4 h-4 text-neutral-100">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </a>
+                        <!-- Second dropdown menu -->
+                        <ul class="hidden [&[data-te-dropdown-show]]:block right-0 left-auto z-[1000] float-left absolute bg-white dark:bg-neutral-700 bg-clip-padding shadow-lg m-0 mt-1 border-none rounded-lg w-20 min-w-max overflow-hidden text-base text-left list-none"
+                            aria-labelledby="dropdownMenuButton2" data-te-dropdown-menu-ref>
+                            <!-- Second dropdown menu items -->
+                            <li>
+                                <a class="block bg-transparent hover:bg-neutral-100 disabled:bg-transparent dark:hover:bg-white/30 px-4 py-2 w-full font-normal text-neutral-700 active:text-neutral-800 disabled:text-neutral-400 dark:text-neutral-200 text-sm active:no-underline whitespace-nowrap disabled:pointer-events-none"
+                                    href="{{ route('login.logout') }}" data-te-dropdown-item-ref>Salir</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="flex-1 bg-neutral-200 border-2">
+            @yield('content')
+        </main>
+
+        <footer class="flex justify-center items-center bg-[#2d2e48] h-14 text-white">
+            <p class="text-center">© UNA PUNO 2025</p>
+        </footer>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
