@@ -1,3 +1,24 @@
+# Sistema de Inscripción de Deportes
+
+## Capturas de pantalla
+
+### Pantalla de Login
+![Login](resources/git-images/login.png)
+
+### Registro de Jugadores
+![Registro de Jugadores](resources/git-images/players-registration.png)
+
+### Jugadores Inscritos
+![Jugadores Inscritos](resources/git-images/players-inscripted.png)
+
+### Registro de Delegado
+![Registro de Delegado](resources/git-images/delegate-inscription.png)
+
+### Edición de Delegado
+![Edición de Delegado](resources/git-images/edit-delegate.png)
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
